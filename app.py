@@ -176,8 +176,7 @@ def main():
             matched = get_matched_skills(resume_skills, jd_skills)
             missing = get_missing_skills(resume_skills, jd_skills)
             recommendation = generate_recommendation(score_pct, matched, missing)
-
-        # ── Results ────────────────────────────────────────────────────────────
+            
         st.success("Analysis complete!")
         st.markdown("---")
 
