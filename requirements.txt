@@ -1,31 +1,9 @@
-# ──────────────────────────────────────────────────────────────────────────────
-# AI Resume Intelligence System — Python Dependencies
-# ──────────────────────────────────────────────────────────────────────────────
-# Install with:
-#   pip install -r requirements.txt
-#
-# Then download the spaCy language model:
-#   python -m spacy download en_core_web_sm
-
-# Core UI
-streamlit>=1.35.0
-
-# PDF parsing
-PyPDF2>=3.0.0
-
-# NLP preprocessing
-nltk>=3.8.1
-spacy>=3.7.0
-
-# Embeddings — TF-IDF
-scikit-learn>=1.4.0
-
-# Embeddings — Sentence Transformers
-sentence-transformers>=3.0.0
-
-# Numerical / Data
-numpy>=1.26.0
-pandas>=2.2.0
-
-# Utilities (usually pre-installed, but explicit for reproducibility)
-setuptools>=69.0.0
+streamlit
+PyPDF2
+nltk
+spacy
+scikit-learn
+sentence-transformers
+numpy
+pandas
+setuptool

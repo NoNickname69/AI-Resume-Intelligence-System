@@ -1,18 +1,5 @@
-"""
-analysis.py
-============
-Keyword / skill extraction and overlap analysis.
-
-Responsibilities:
-  - Maintain a curated tech-skill vocabulary
-  - Extract skills present in a given text
-  - Identify matched and missing skills
-  - Generate a plain-English recommendation
-"""
-
 import re
 
-# ── Curated skill vocabulary ──────────────────────────────────────────────────
 # Extend this list to cover more domains / roles.
 
 SKILL_VOCABULARY: list[str] = [
@@ -75,13 +62,11 @@ def extract_skills(text: str) -> set[str]:
     Uses whole-word matching to avoid false positives
     (e.g. 'r' inside 'learning').
 
-    Parameters
-    ----------
+    Parameters:
     text : str
         Raw (non-preprocessed) text — preserves multi-word phrases.
 
-    Returns
-    -------
+    Returns:
     set[str]
         Set of identified skill strings (lowercase).
     """
@@ -105,15 +90,13 @@ def get_matched_skills(
     """
     Return skills that appear in BOTH the resume and job description.
 
-    Parameters
-    ----------
+    Parameters:
     resume_skills : set[str]
         Skills extracted from the resume.
     jd_skills : set[str]
         Skills extracted from the job description.
 
-    Returns
-    -------
+    Returns:
     list[str]
         Sorted list of matched skills (title-cased for display).
     """
@@ -128,15 +111,13 @@ def get_missing_skills(
     """
     Return skills required by the JD but absent from the resume.
 
-    Parameters
-    ----------
+    Parameters:
     resume_skills : set[str]
         Skills extracted from the resume.
     jd_skills : set[str]
         Skills extracted from the job description.
 
-    Returns
-    -------
+    Returns:
     list[str]
         Sorted list of missing skills (title-cased for display).
     """
@@ -153,46 +134,42 @@ def generate_recommendation(
     Produce a concise plain-English recommendation based on the match score
     and skill overlap.
 
-    Parameters
-    ----------
+    Parameters:
     score_pct : float
-        Similarity score as a percentage (0–100).
+        Similarity score as a percentage (0 - 100).
     matched : list[str]
         List of matched skills.
     missing : list[str]
         List of missing skills.
 
-    Returns
-    -------
+    Returns:
     str
         Multi-sentence recommendation paragraph.
     """
     n_matched = len(matched)
     n_missing = len(missing)
 
-    # ── Score-based opening ───────────────────────────────────────────────────
     if score_pct >= 80:
         opening = (
-            f"🟢 **Excellent match!** Your resume aligns very strongly with "
+            f"**Excellent match!** Your resume aligns very strongly with "
             f"this role ({score_pct}% similarity)."
         )
     elif score_pct >= 60:
         opening = (
-            f"🟡 **Good match.** Your resume shows solid alignment with this "
+            f"**Good match.** Your resume shows solid alignment with this "
             f"role ({score_pct}% similarity), with room to strengthen a few areas."
         )
     elif score_pct >= 40:
         opening = (
-            f"🟠 **Moderate match.** Your resume partially aligns with the job "
+            f"**Moderate match.** Your resume partially aligns with the job "
             f"description ({score_pct}% similarity). Consider tailoring it further."
         )
     else:
         opening = (
-            f"🔴 **Weak match.** The semantic similarity is low ({score_pct}%). "
+            f"**Weak match.** The semantic similarity is low ({score_pct}%). "
             f"The role may require significant upskilling or the resume needs rewriting."
         )
 
-    # ── Skill summary ─────────────────────────────────────────────────────────
     if n_matched > 0:
         skill_line = (
             f"You matched **{n_matched}** required skill(s) "
@@ -201,9 +178,8 @@ def generate_recommendation(
     else:
         skill_line = "No direct skill matches were detected from the vocabulary."
 
-    # ── Missing skill advice ──────────────────────────────────────────────────
     if n_missing == 0:
-        missing_line = "You appear to cover all key skills mentioned in the job description. ✅"
+        missing_line = "You appear to cover all key skills mentioned in the job description."
     elif n_missing <= 3:
         missing_line = (
             f"You are missing **{n_missing}** skill(s) listed in the JD: "

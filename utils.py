@@ -93,7 +93,7 @@ def percentage_overlap(set_a: set, set_b: set) -> float:
     Returns
     -------
     float
-        Coverage percentage (0.0 – 100.0). Returns 0.0 if set_b is empty.
+        Coverage percentage (0.0 - 100.0). Returns 0.0 if set_b is empty.
     """
     if not set_b:
         return 0.0

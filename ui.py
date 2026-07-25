@@ -1,11 +1,3 @@
-"""
-ui.py
-======
-Reusable Streamlit UI components.
-
-Keeps app.py clean by separating rendering logic from pipeline logic.
-"""
-
 import streamlit as st
 from similarity import interpret_score
 
@@ -16,7 +8,7 @@ def render_header() -> None:
         """
         <div style="text-align: center; padding: 1rem 0 0.5rem;">
             <h1 style="font-size: 2.4rem; font-weight: 800; color: #1e293b; margin-bottom: 0.2rem;">
-                🧠 AI Resume Intelligence System
+                AI Resume Intelligence System
             </h1>
             <p style="font-size: 1.05rem; color: #64748b;">
                 Semantic resume ↔ job description matching powered by NLP embeddings
@@ -31,16 +23,12 @@ def render_sidebar() -> str:
     """
     Render the sidebar with method selector and project info.
 
-    Returns
-    -------
+    Returns:
     str
         Selected embedding method: 'TF-IDF' or 'Sentence Transformer'.
     """
     with st.sidebar:
-        st.image(
-            "https://img.icons8.com/fluency/96/000000/artificial-intelligence.png",
-            width=72,
-        )
+
         st.title("Settings")
         st.markdown("---")
 
@@ -59,12 +47,12 @@ def render_sidebar() -> str:
             """
             **About**
 
-            This MVP demonstrates:
-            - 📄 PDF text extraction
-            - 🔤 NLP preprocessing
-            - 🔢 Embedding generation
-            - 📐 Cosine similarity
-            - 🔍 Skill gap analysis
+            This Version demonstrates:
+            - PDF text extraction
+            - NLP preprocessing
+            - Embedding generation
+            - Cosine similarity
+            - Skill gap analysis
 
             Built with Python · Streamlit · spaCy ·
             sentence-transformers · scikit-learn
@@ -72,7 +60,7 @@ def render_sidebar() -> str:
         )
 
         st.markdown("---")
-        st.caption("AI Resume Intelligence System · MVP v1.0")
+        st.caption("AI Resume Intelligence System · APP_VERSION = '1.0'")
 
     return method
 
@@ -81,10 +69,9 @@ def render_score_card(score_pct: float, method: str) -> None:
     """
     Display the main match score as a styled card.
 
-    Parameters
-    ----------
+    Parameters:
     score_pct : float
-        Match percentage (0–100).
+        Match percentage (0 - 100).
     method : str
         Embedding method used.
     """
@@ -122,8 +109,7 @@ def render_skills_section(
     """
     Display a labelled list of skill pills.
 
-    Parameters
-    ----------
+    Parameters:
     title : str
         Section heading.
     skills : list[str]
@@ -157,8 +143,7 @@ def render_analysis_summary(
     """
     Render the overall analysis section with metrics and recommendation text.
 
-    Parameters
-    ----------
+    Parameters:ś
     recommendation : str
         Markdown-formatted recommendation paragraph.
     score_pct : float
@@ -168,7 +153,7 @@ def render_analysis_summary(
     jd_text : str
         Raw job description text.
     """
-    st.markdown("#### 📊 Overall Analysis")
+    st.markdown("#### Overall Analysis")
 
     # Quick stats row
     m1, m2, m3 = st.columns(3)

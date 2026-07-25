@@ -1,30 +1,24 @@
-"""
-parser.py
-==========
-Handles PDF text extraction using PyPDF2.
-Safely reads each page and concatenates the text.
-"""
-
 import io
 import PyPDF2
 
 
-def extract_text_from_pdf(uploaded_file) -> str:
+def extract_text_from_pdf(
+        uploaded_file,
+        ) -> str:
     """
     Extract plain text from a Streamlit UploadedFile object (PDF).
 
-    Parameters
-    ----------
-    uploaded_file : streamlit.runtime.uploaded_file_manager.UploadedFile
-        The PDF file uploaded by the user.
+    Parameters:
+        uploaded_file: 
+            The PDF file uploaded by the user.
 
-    Returns
-    -------
+    Returns:
     str
         Concatenated text from all pages, or empty string on failure.
     """
     text = ""
     try:
+
         # Read bytes from the uploaded file
         pdf_bytes = uploaded_file.read()
         pdf_reader = PyPDF2.PdfReader(io.BytesIO(pdf_bytes))
@@ -46,17 +40,17 @@ def extract_text_from_pdf(uploaded_file) -> str:
     return text.strip()
 
 
-def extract_text_from_string(text: str) -> str:
+def extract_text_from_string(
+        text: str
+        ) -> str:
     """
     Passthrough helper for plain-text inputs (job description, etc.).
 
-    Parameters
-    ----------
-    text : str
+    Parameters:
+    text: 
         Raw input string.
 
-    Returns
-    -------
+    Returns:
     str
         Stripped text.
     """

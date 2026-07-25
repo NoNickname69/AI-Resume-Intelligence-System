@@ -1,9 +1,3 @@
-"""
-AI Resume Intelligence System
-==============================
-Main Streamlit application — orchestrates the full NLP pipeline.
-"""
-
 import streamlit as st
 
 # Local module imports
@@ -26,15 +20,13 @@ from ui import (
 )
 from utils import validate_inputs, log_info
 
-# ── Page config ────────────────────────────────────────────────────────────────
 st.set_page_config(
+    page_icon="🤓",
     page_title="AI Resume Intelligence System",
-    page_icon="🧠",
     layout="wide",
     initial_sidebar_state="expanded",
 )
 
-# ── Inject custom CSS ──────────────────────────────────────────────────────────
 st.markdown(
     """
     <style>
@@ -112,19 +104,16 @@ st.markdown(
 def main():
     """Entry point — renders UI and runs the NLP pipeline on user action."""
 
-    # ── Sidebar (method selector + about) ─────────────────────────────────────
     embedding_method = render_sidebar()
 
-    # ── Header ────────────────────────────────────────────────────────────────
     render_header()
 
     st.markdown("---")
 
-    # ── Input columns ─────────────────────────────────────────────────────────
     col_left, col_right = st.columns([1, 1], gap="large")
 
     with col_left:
-        st.markdown("#### 📄 Upload Resume (PDF)")
+        st.markdown("#### Upload Resume (PDF)")
         uploaded_file = st.file_uploader(
             label="Drag & drop or click to browse",
             type=["pdf"],
@@ -132,7 +121,7 @@ def main():
         )
 
     with col_right:
-        st.markdown("#### 💼 Paste Job Description")
+        st.markdown("#### Paste Job Description")
         job_description = st.text_area(
             label="Job Description",
             placeholder="Paste the full job description here…",
@@ -142,14 +131,12 @@ def main():
 
     st.markdown("---")
 
-    # ── Analyse button ─────────────────────────────────────────────────────────
     analyse_btn = st.button(
-        "🔍  Analyse Resume",
+        "Analyse Resume",
         type="primary",
         use_container_width=True,
     )
 
-    # ── Pipeline ───────────────────────────────────────────────────────────────
     if analyse_btn:
         # 1. Validate
         is_valid, error_msg = validate_inputs(uploaded_file, job_description)
@@ -191,7 +178,7 @@ def main():
             recommendation = generate_recommendation(score_pct, matched, missing)
 
         # ── Results ────────────────────────────────────────────────────────────
-        st.success("✅  Analysis complete!")
+        st.success("Analysis complete!")
         st.markdown("---")
 
         # Score card + method badge
@@ -202,9 +189,9 @@ def main():
         # Skills columns
         skill_col1, skill_col2 = st.columns(2, gap="large")
         with skill_col1:
-            render_skills_section("✅ Matched Skills", matched, kind="match")
+            render_skills_section("Matched Skills", matched, kind="match")
         with skill_col2:
-            render_skills_section("❌ Missing Skills", missing, kind="missing")
+            render_skills_section("Missing Skills", missing, kind="missing")
 
         st.markdown("---")
 
@@ -212,9 +199,9 @@ def main():
         render_analysis_summary(recommendation, score_pct, resume_text, job_description)
 
         # Raw text expanders (debug / transparency)
-        with st.expander("🔎 View Extracted Resume Text"):
+        with st.expander("View Extracted Resume Text"):
             st.text_area("Resume Text", resume_text, height=250, disabled=True)
-        with st.expander("🔎 View Preprocessed Resume Text"):
+        with st.expander("View Preprocessed Resume Text"):
             st.text_area("Cleaned Resume", clean_resume, height=150, disabled=True)
 
 
