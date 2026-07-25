@@ -255,7 +255,7 @@ Then open the URL Streamlit prints (typically `http://localhost:8501`).
 
 | Input Screen | Results Screen |
 |---|---|
-| _placeholder_ | _placeholder_ |
+|![Input Screen Screenshot](images/input.png)| ![Output Screen Screenshot](images/output.png) |
 
 ---
 
